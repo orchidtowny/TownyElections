@@ -1,7 +1,8 @@
 package site.remlit.blueb.townyElections.model
 
+import site.remlit.blueb.townyElections.service.ElectionService
 import java.sql.ResultSet
-import java.time.LocalDateTime
+import java.util.UUID
 
 data class Election(
     val id: String,
@@ -9,7 +10,8 @@ data class Election(
     val length: Int,
     val startedAt: Int,
 ) {
-    fun getCandidates() {}
+    fun getCandidates() = ElectionService.getCandidates(UUID.fromString(id))
+    fun getVotes() = ElectionService.getVotes(UUID.fromString(id))
 
     companion object {
         fun fromRs(rs: ResultSet): Election? {

@@ -5,9 +5,11 @@ import com.palmergames.bukkit.towny.TownyMessaging
 import site.remlit.blueb.townyElections.Database
 import site.remlit.blueb.townyElections.TownyElections
 import site.remlit.blueb.townyElections.event.ElectionStartEvent
+import site.remlit.blueb.townyElections.model.Candidate
 import site.remlit.blueb.townyElections.model.Election
 import site.remlit.blueb.townyElections.model.ElectionTargetType
 import site.remlit.blueb.townyElections.model.Settings
+import site.remlit.blueb.townyElections.model.Vote
 import java.util.UUID
 import kotlin.use
 
@@ -46,6 +48,30 @@ class ElectionService {
                     return Election.fromRs(rs)
                 }
             }
+        }
+
+        fun getCandidates(id: UUID): List<Candidate> {
+            val list = mutableListOf<Candidate>()
+            Database.connection.prepareStatement("SELECT * FROM candidate WHERE election = ?").use { ps ->
+                ps.setString(1, id.toString())
+                ps.executeQuery().use { rs ->
+                    val value = Candidate.fromRs(rs)
+                    if (value != null) list.add(value)
+                }
+            }
+            return list
+        }
+
+        fun getVotes(id: UUID): List<Vote> {
+            val list = mutableListOf<Vote>()
+            Database.connection.prepareStatement("SELECT * FROM vote WHERE election = ?").use { ps ->
+                ps.setString(1, id.toString())
+                ps.executeQuery().use { rs ->
+                    val value = Vote.fromRs(rs)
+                    if (value != null) list.add(value)
+                }
+            }
+            return list
         }
 
         fun checkElections() {

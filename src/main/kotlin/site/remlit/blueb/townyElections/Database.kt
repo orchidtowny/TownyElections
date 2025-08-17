@@ -53,6 +53,10 @@ class Database {
 
                     stmt.execute("UPDATE database_meta SET version = 3 WHERE id = 'r'")
                 }
+
+                if (version <= 3) {
+                    stmt.execute("UPDATE database_meta SET version = 4 WHERE id = 'r'")
+                }
             }
         }
     }
