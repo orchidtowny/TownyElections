@@ -1,6 +1,6 @@
 name: TownyElections
 version: '2025.8.1.0'
-main: site.remlit.blueb.townyElections.TownyElections
+main: site.remlit.townyelections.TownyElections
 api-version: '1.19'
 load: POSTWORLD
 authors: [ blueb ]
