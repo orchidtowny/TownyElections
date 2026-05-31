@@ -1,8 +1,12 @@
 name: TownyElections
-version: '2025.8.1.0'
+version: '%version%'
 main: site.remlit.townyelections.TownyElections
-api-version: '1.19'
+api-version: '1.20'
 load: POSTWORLD
 authors: [ blueb ]
+loader: site.remlit.townyelections.TownyElectionsPluginLoader
+
 depend:
   - Towny
+softdepend:
+  - PlaceholderAPI
